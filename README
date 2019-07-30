@@ -1,0 +1,139 @@
+README for Assignment 5
+Steven Mare - mrxste008
+
+Files included:
+driver.cpp - used to create 'samp' executable which takes various input arguments to decide which function to perform
+
+audio.h -  header that includes implementation of Audio template class
+
+unitTests.cpp - used to create executable for running unitTests on Audio class
+
+Makefile:
+Use Makefile to run application for Assignment 5. Makefile includes many functions that have set defualt values:
+
+Makefile variables:
+outfile = "out*.raw";
+file1 = "sample_input/countdown40sec_44100_signed_16bit_mono.raw"
+file2 = "sample_input/siren40sec_44100_signed_16bit_mono.raw"
+file3 = "sample_input/beez18sec_44100_signed_16bit_mono.raw"
+file4 = "sample_input/frogs18sec_44100_signed_16bit_mono.raw"
+file5 = "sample_input/countdown40sec_44100_signed_16bit_stereo.raw"
+file6 = "sample_input/siren40sec_44100_signed_16bit_stereo.raw"
+file7 = "sample_input/beez18sec_44100_signed_16bit_stereo.raw"
+file8 = "sample_input/frogs18sec_44100_signed_16bit_stereo.raw"
+
+default: runs help which opens this readme	
+
+driver_o: creates driver.o from driver.cpp
+
+executable: creates 'samp' executable from driver.o
+
+functions: performs the follow in this order - clean driver_o executable
+
+tests: runs unit test cases on Audio class
+
+clean: clean all .o, .raw and executable files from root directory
+
+help: opens this readme
+
+Below is a set of sample functions that can be performed.
+Where applicable, the sound is played imediatly after the function is performed.
+
+mono_add: functions
+	./samp -r 44100 -b 16 -c 1 \
+	-add $(file1) $(file2)
+	play -r 44100 -e signed -b 16 -c 1 $(outfile)	
+
+mono_cut: functions
+	./samp -r 44100 -b 16 -c 1 \
+	-cut 124000 364000 $(file1)
+	play -r 44100 -e signed -b 16 -c 1 $(outfile)	
+
+mono_radd: functions
+	./samp -r 44100 -b 16 -c 1 \
+	-radd 124000 364000 4000 244000 $(file1) $(file1)
+	play -r 44100 -e signed -b 16 -c 1 $(outfile)	
+
+mono_cat: functions
+	./samp -r 44100 -b 16 -c 1 \
+	-cat $(file3) $(file4)
+	play -r 44100 -e signed -b 16 -c 1 $(outfile)	
+
+mono_v: functions
+	./samp -r 44100 -b 16 -c 1 \
+	-v 0.2 0.1 $(file1)
+	play -r 44100 -e signed -b 16 -c 1 $(outfile)	
+
+mono_rev: functions
+	./samp -r 44100 -b 16 -c 1 \
+	-rev $(file1)
+	play -r 44100 -e signed -b 16 -c 1 $(outfile)	
+
+mono_rms: functions
+	./samp -r 44100 -b 16 -c 1 \
+	-rms $(file1)	
+
+mono_norm: functions
+	./samp -r 44100 -b 16 -c 1 \
+	-norm 1000 1000 $(file1)
+	play -r 44100 -e signed -b 16 -c 1 $(outfile)	
+
+mono_fadein: functions
+	./samp -r 44100 -b 16 -c 1 \
+	-fadein 11 $(file1)
+	play -r 44100 -e signed -b 16 -c 1 $(outfile)	
+
+mono_fadeout: functions
+	./samp -r 44100 -b 16 -c 1 \
+	-fadeout 17 $(file3)
+	play -r 44100 -e signed -b 16 -c 1 $(outfile)
+
+stereo_add: functions
+	./samp -r 44100 -b 16 -c 2 \
+	-add $(file5) $(file6)
+	play -r 44100 -e signed -b 16 -c 2 $(outfile)	
+
+stereo_cut: functions
+	./samp -r 44100 -b 16 -c 2 \
+	-cut 244000 424000 $(file5)
+	play -r 44100 -e signed -b 16 -c 2 $(outfile)	
+
+stereo_radd: functions
+	./samp -r 44100 -b 16 -c 2 \
+	-radd 124000 484000 4000 364000 $(file5) $(file5)
+	play -r 44100 -e signed -b 16 -c 2 $(outfile)	
+
+stereo_cat: functions
+	./samp -r 44100 -b 16 -c 2 \
+	-cat $(file7) $(file8)
+	play -r 44100 -e signed -b 16 -c 2 $(outfile)	
+
+stereo_v: functions
+	./samp -r 44100 -b 16 -c 2 \
+	-v 0.1 0.4 $(file5)
+	play -r 44100 -e signed -b 16 -c 2 $(outfile)	
+
+stereo_rev: functions
+	./samp -r 44100 -b 16 -c 2 \
+	-rev $(file5)
+	play -r 44100 -e signed -b 16 -c 2 $(outfile)	
+
+stereo_rms: functions
+	./samp -r 44100 -b 16 -c 2 \
+	-rms $(file5)	
+
+stereo_norm: functions
+	./samp -r 44100 -b 16 -c 2 \
+	-norm 3555 1000 $(file5)
+	play -r 44100 -e signed -b 16 -c 2 $(outfile)	
+
+stereo_fadein: functions
+	./samp -r 44100 -b 16 -c 2 \
+	-fadein 15 $(file5)
+	play -r 44100 -e signed -b 16 -c 2 $(outfile)	
+
+stereo_fadeout: functions
+	./samp -r 44100 -b 16 -c 2 \
+	-fadeout 17 $(file7)
+	play -r 44100 -e signed -b 16 -c 2 $(outfile)	
+
